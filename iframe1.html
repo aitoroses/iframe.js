@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="iframe-utils.js" type="text/javascript"></script>
+  </head>
+  <body>
+     <p>
+        IM THE IFRAME 1;
+     </p>
+
+  <script>
+
+    function l() {
+      console.log.apply(console, arguments)
+    }
+
+    var utils = new IframeUtils();
+    l('Accessing parent from IFRAME 1')
+    // Gets the parents IframeUtils
+
+    var parentUtils = utils.getParent();
+    l(parentUtils.getDocument());
+    l("parent has iframes");
+    l(parentUtils.query('iframe'))
+
+    l("Get IFRAME 2 from IFRAME 1");
+    var frame2 = parentUtils.getIframeBySource("iframe2");
+    l(frame2);
+
+
+    frame2.onReady(function() {
+      // Call its hello method
+      frame2.evaluate('hello()');
+
+      // Replace the hello method
+      frame2._window.hello = function() {
+        alert('IFRAME 1 changed to IFRAME2')
+      }
+
+      // Evaluate again an check that it is diferrent result
+      frame2.evaluate('hello()');
+
+    });
+
+
+  </script>
+  </body>
+</html>
