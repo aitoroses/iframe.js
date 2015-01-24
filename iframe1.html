@@ -15,30 +15,26 @@
     }
 
     var utils = new IframeUtils();
-    l('Accessing parent from IFRAME 1')
+
     // Gets the parents IframeUtils
+    //l("Get IFRAME 2 from IFRAME 1");
+    //var parentUtils = utils.getParent();
+    //var frame2 = parentUtils.getIframeBySource("iframe2");
 
-    var parentUtils = utils.getParent();
-    l(parentUtils.getDocument());
-    l("parent has iframes");
-    l(parentUtils.query('iframe'))
-
-    l("Get IFRAME 2 from IFRAME 1");
-    var frame2 = parentUtils.getIframeBySource("iframe2");
-    l(frame2);
-
+    // Get directly the frame2 by searching in its parent
+    var frame2 = utils.getIframeBySource("iframe2");
 
     frame2.onReady(function() {
       // Call its hello method
-      frame2.evaluate('hello()');
+      this.evaluate('hello()');
 
       // Replace the hello method
-      frame2._window.hello = function() {
+      this._window.hello = function() {
         alert('IFRAME 1 changed to IFRAME2')
       }
 
       // Evaluate again an check that it is diferrent result
-      frame2.evaluate('hello()');
+      this.evaluate('hello()');
 
     });
 
