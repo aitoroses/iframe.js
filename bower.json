@@ -1,9 +1,10 @@
 {
-  "name": "iframe-utils",
+  "name": "iframe.js",
   "version": "0.0.0",
   "authors": [
     "Aitor Oses <aitor.oses@gmail.com>"
   ],
+  "main": "iframe-utils.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
